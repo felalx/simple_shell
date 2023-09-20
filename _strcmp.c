@@ -1,31 +1,21 @@
 #include "main.h"
 
 /**
- * _strdup - duplicates string
- * @src: string to be duplicated.
- * Return: On success duplicate.
+ * _strcmp - compares two strings
+ * @s1: First string.
+ *
+ * @s2: Second string
+ * Return: On success 0.
  * On error, -1 is returned.
  */
 
-char *_strdup(const char *src)
+int _strcmp(const char *s1, const char *s2)
 {
-	char *duplicate;
-	char *temp;
-
-	if (src == NULL)
+	while (*s1 && (*s1 == *s2))
 	{
-		return (NULL);
+		s1++;
+		s2++;
 	}
 
-	duplicate = (char *)malloc(strlen(src) + 1);
-	if (duplicate == NULL)
-	{
-		return (NULL);
-	}
-
-	temp = duplicate;
-	while ((*temp++ = *src++))
-		;
-
-	return (duplicate);
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }

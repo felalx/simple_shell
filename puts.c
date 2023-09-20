@@ -1,44 +1,28 @@
 #include "main.h"
-/**
- * _snprintf - prints formated string to buffer
- * @format: buffer
- * @size: buffer size,
- * @str: string input,
- * Return: On success void.
- */
-int _snprintf(char *str, size_t size, const char *format, ...)
-{
-	va_list args;
-	int out = 0;
-	const char *ptr;
 
-	va_start(args, format);
-	for (ptr = format; *ptr && (size - out - 1) > 0; ptr++)
+/**
+ * _puts - writes the string c to stdout
+ * @str: String format.
+ *
+ * Return: On success 1.
+ * On error, -1 is returned.
+ */
+
+int _puts(const char *str)
+{
+	while (*str)
 	{
-		if (*ptr == '%')
+		if (_putchar(*str) == EOF)
 		{
-			ptr++;
-			switch (*ptr)
-			{
-				case 's':
-					out += append(str + out, size - out, va_arg(args, char*));
-					break;
-				case 'd':
-					out += append_int(str + out, size - out, va_arg(args, int));
-					break;
-				case '%':
-					str[out++] = '%';
-					break;
-				default:
-					str[out++] = '%';
-					str[out++] = *ptr;
-					break;
-			}
+			return (EOF);
 		}
-		else
-			str[out++] = *ptr;
+		str++;
 	}
-	str[out] = '\0';
-	va_end(args);
-	return (out);
+
+	if (_putchar('\n') == EOF)
+	{
+		return (EOF);
+	}
+
+	return (1);
 }

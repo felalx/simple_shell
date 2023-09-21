@@ -18,31 +18,33 @@ int main(int ac, char **av)
 	handle_args(ac, av);
 	while (1)
 	{
-	if (!read_input_line(&lineptr, &n))
-	{
-	continue;
-	}
-	if (lineptr[0] == '^' && lineptr[1] == '[')
-	{
-	continue;
-	}
-	array = tokenize_input(lineptr, &i);
-	if (!array)
-	{
-	continue;
-	}
-	if (check_exit(array))
-	{
-	free(lineptr);
-	exit(0);
-	}
-	if (_strcmp(array[0], "env") == 0)
-	{
-	handle_env();
-	free(array);
-	continue;
-	}
-	execute_command(array, av[0]);
-	free(array);
+		if (!read_input_line(&lineptr, &n))
+		{
+			free(lineptr);
+			continue;
+		}
+		if (lineptr[0] == '^' && lineptr[1] == '[')
+		{
+			free(lineptr);
+			continue;
+		}
+		array = tokenize_input(lineptr, &i);
+		if (!array)
+		{
+			continue;
+		}
+		if (check_exit(array))
+		{
+			free(lineptr);
+			exit(0);
+		}
+		if (_strcmp(array[0], "env") == 0)
+		{
+			handle_env();
+			free(array);
+			continue;
+		}
+		execute_command(array, av[0]);
+		free(array);
 	}
 }

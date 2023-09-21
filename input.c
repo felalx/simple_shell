@@ -14,22 +14,23 @@ char *read_input_line(char **lineptr, size_t *n)
 
 	if (isatty(STDIN_FILENO) && write(1, "($) ", 4) == -1)
 	{
-	perror("Error:");
+		perror("Error:");
 	}
 
 	read_status = getline(lineptr, n, stdin);
 	if (read_status == -1)
 	{
-	if (!isatty(STDIN_FILENO))
-	{
-	exit(0);
-	}
+		free(lineptr);
+		if (!isatty(STDIN_FILENO))
+		{
+			exit(0);
+		}
 
-	if (errno)
-	{
-	perror("Error");
-	}
-	exit(0);
+		if (errno)
+		{
+			perror("Error");
+		}
+		exit(0);
 	}
 	return (*lineptr);
 }
@@ -52,18 +53,20 @@ char **tokenize_input(char *line, int *size)
 
 	if (!array)
 	{
-	perror("Error allocating memory");
-	return (NULL);
+		free(array);
+		perror("Error allocating memory");
+		return (NULL);
 	}
 
 	token = strtok(line, " \t\n");
 	while (token)
 	{
-	array[i++] = token;
-	token = strtok(NULL, " \t\n");
+		array[i++] = token;
+		token = strtok(NULL, " \t\n");
 	}
 	array[i] = NULL;
 	*size = i;
+	free(line);
 
 	return (array);
 }

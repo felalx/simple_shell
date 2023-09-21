@@ -41,6 +41,7 @@ int main(int ac, char **av)
 		if (_strcmp(array[0], "env") == 0)
 		{
 			handle_env();
+			free(lineptr);
 			free(array);
 			continue;
 		}

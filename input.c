@@ -66,7 +66,6 @@ char **tokenize_input(char *line, int *size)
 	}
 	array[i] = NULL;
 	*size = i;
-	free(line);
 
 	return (array);
 }

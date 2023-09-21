@@ -45,6 +45,7 @@ int main(int ac, char **av)
 			continue;
 		}
 		execute_command(array, av[0]);
+		free(lineptr);
 		free(array);
 	}
 }

@@ -13,11 +13,15 @@ int main(int ac, char **av)
 	int i;
 	char **array;
 	size_t n = 0;
+	bool pipe = true;
 
 	lineptr = NULL;
 	handle_args(ac, av);
-	while (1)
+	while (1 && pippe)
 	{
+		if (isatty(STDIN_FILENO) == 0)
+			pipe = false;
+
 		if (!read_input_line(&lineptr, &n))
 		{
 			free(lineptr);

@@ -10,6 +10,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <errno.h>
+#include <stdbool.h>
 
 extern char **environ;
 char *read_input_line(char **lineptr, size_t *n);

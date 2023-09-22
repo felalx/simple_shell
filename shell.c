@@ -17,7 +17,7 @@ int main(int ac, char **av)
 
 	lineptr = NULL;
 	handle_args(ac, av);
-	while (1 && pippe)
+	while (1 && pipe)
 	{
 		if (isatty(STDIN_FILENO) == 0)
 			pipe = false;
@@ -53,4 +53,5 @@ int main(int ac, char **av)
 		free(lineptr);
 		free(array);
 	}
+	return (0);
 }
